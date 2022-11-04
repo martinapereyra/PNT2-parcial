@@ -36,15 +36,14 @@
       }
     },
     methods: {
-    computed: {
-    }
+    
   }
   }
 
 </script>
 
 <style scoped lang="css">
-  .src-componentes-http-client {
+  .src-componentes-respuestas {
 
   }
 
