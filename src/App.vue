@@ -1,7 +1,7 @@
 <template>
   <div class = "container-fluid mt-3">
     <div class="jumbotron">
-      <h1>TP4 - Programación nuevas tecnologías</h1>
+      <h1>Parcial - Programación nuevas tecnologías</h1>
       <br>
       <Navbar/>
       <br>

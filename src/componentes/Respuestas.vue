@@ -9,7 +9,7 @@
       <table class="table table-light">
           <tr >
             <tr>
-            <th>Numero de Pregunta</th>
+            <th>Número de Pregunta</th>
             <th>Respuesta</th>
           </tr>
           <tr v-for="(pregunta,index) in preguntas" :key="index" >
