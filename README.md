@@ -1,4 +1,4 @@
-# tp4-vue-cli
+# PNT2-parcial
 
 ## Project setup
 ```
