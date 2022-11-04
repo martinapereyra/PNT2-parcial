@@ -6,7 +6,6 @@
       <hr>
       <hr>
       <br>
-
       <table class="table table-light">
           <tr >
             <tr>
@@ -17,16 +16,10 @@
             <td>{{ pregunta.numero }}</td>
             <td>{{pregunta.respuestas }}</td>
           </tr>
-        </table>
-
-
-      
-      
+        </table>  
     </div>
   </section>
-
 </template>
-
 <script>
 
   export default  {
@@ -43,12 +36,8 @@
       }
     },
     methods: {
-      
-    
     computed: {
-
     }
-
   }
   }
 

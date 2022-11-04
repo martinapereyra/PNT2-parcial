@@ -44,10 +44,9 @@
             <div slot="required" class="alert alert-danger mt-1">Este campo es obligatorio</div>
           </field-messages>
         </validate>
-
         <br>
         
-        <button v-if="gastos.length" class="btn btn-danger my-3 mr-3 " @click="gastos = []">Limpiar tabla</button>
+        <button v-if="gastos.length" class="btn btn-danger my-3 mr-3 " @click="limpiar()">Limpiar tabla</button>
         <button class="btn btn-success my-3" :disabled="formstate.$invalid" type="submit">Enviar</button>
       </vue-form>
       <br>
@@ -58,13 +57,12 @@
       <h2>Detalle de Gastos</h2>
       <hr>
          <label for="descripcion" class="fw-bold"><em>Presupuesto</em></label>
-        <input type="number" id="presupuesto" required name="presupuesto" autocomplete="off" class="form-control" v-model="presupuesto" />
+        <input type="number" id="presupuesto" required name="presupuesto" autocomplete="off" class="form-control" v-model="presupuesto" placeholder="Ingrese el presupuesto" />
       <br>
 
-      <!-- <pre>{{ gastos }}</pre> -->
 
-      <div v-if="gastos.length" class="table-responsive table-light">
-        <table class="table">
+      <div v-if="gastos.length" class="table-responsive ">
+        <table class="table table-light ">
           <tr>
             <th>Nombre</th>
             <th>Descripción</th>
@@ -78,18 +76,16 @@
             <td>{{ gasto.fecha }}</td>
           </tr>
           <tr>
-            <tr :style="{color: calcularTotal(gasto).color }">
+            <tr :style="{color: calcularTotal().color }">
             <th></th>
-            <th>Total</th>
+            <th>TOTAL</th>
             <th>$ {{calcularTotal().total}}</th>
           </tr>
         </table>
       </div>
       <h3 v-else class="alert alert-info">No hay gastos ingresados</h3>
-
     </div>
   </section>
-
 </template>
 
 <script>
@@ -107,7 +103,8 @@
         gastos : [],
         nombreMinLength: 3,
         nombreMaxLength: 15,
-        presupuesto: 0,
+        total: 0,
+        presupuesto: "",
         gastoTopeMin: 1000,
         gastoTopeMax: 5000
 
@@ -121,29 +118,29 @@
           importe: null,
         }
       },
+
+      limpiar(){
+        this. gastos = [],
+        this.presupuesto = "",
+        this.total = 0
+      },
       enviar() {
         let gasto = {...this.formData}
+        this.total += gasto.importe
         gasto.fecha = new Date().toLocaleString()
-
-        console.log(gasto)
         this.gastos.push(gasto)
-
         this.formData = this.getInitialData()
         this.formstate._reset()
       },
       
       calcularTotal() {
-        let total = 0;
-        this.gastos.forEach(gasto =>{
-            total += gasto.importe;
-        })
         let color = "#FF00FF"
         if(this.presupuesto > 0 ) this.gastoTopeMax = this.presupuesto;
-        if(total < this.gastoTopeMin) color = "#14A44D"
-        if(total > (this.gastoTopeMax)) color = "#E4A11B"
+        if(this.total < this.gastoTopeMin) color = "#14A44D"
+        if(this.total > (this.gastoTopeMax)) color = "#E4A11B"
 
         return {
-          total,
+          total: this.total,
           color
         }
       }
